@@ -14,7 +14,7 @@ def handle_client(conn, addr):
 
 def main():
     parser = argparse.ArgumentParser(prog="spyll", description="basic http sever")
-    parser.add_argument('--host', type=str, default="192.168.1.53")
+    parser.add_argument('--host', type=str, default="127.0.0.1")
     parser.add_argument('--port', type=int, default=8888)
 
     args = parser.parse_args()
