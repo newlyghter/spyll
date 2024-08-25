@@ -5,12 +5,18 @@ def start_server(HOST, PORT):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind((HOST, PORT))
         sock.listen()
-        print("server is listening..")
+        print(f"server is listening on ip: {HOST} port: {PORT}")
         conn, addr = sock.accept()
         handle_client(conn, addr)
+        sock.close()
 
 def handle_client(conn, addr):
     print(f"connected from {addr}: ")
+    request = conn.recv(4096)
+    print(request)
+    http_response = b'HTTP/1.1 200 OK\n\nHello World!'
+    conn.sendall(http_response)
+    conn.close()
 
 def main():
     parser = argparse.ArgumentParser(prog="spyll", description="basic http sever")
