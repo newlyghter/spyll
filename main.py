@@ -18,6 +18,19 @@ def handle_client(conn, addr):
     conn.sendall(http_response)
     conn.close()
 
+def respond(code, conn):
+    match code:
+        case '404':
+            response = b'HTTP/1.1 404 Not Found\n'
+            conn.sendall(response)
+
+        case '200':
+            reponse = b'HTTP/1.1 200 OK\n\nHello World!'
+            conn.sendall(response)
+
+        case _:
+            print("fuck you")
+
 def main():
     parser = argparse.ArgumentParser(prog="spyll", description="basic http sever")
     parser.add_argument('--host', type=str, default="127.0.0.1")
